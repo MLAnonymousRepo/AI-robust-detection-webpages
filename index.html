@@ -8,9 +8,299 @@
 	<title>Improving the Robustness of AI-generated Content Detection</title>
 	<link rel="stylesheet" href="styles.css">
 </head>
-  <body>
-    <H1> Improving the Robustness of AI-generated Content Detection  </H1>
-    <H2> <i> Website Placeholder </i></H2>
-    <p align="center"> This is the official website for the paper Improving the Robustness of AI-generated Content Detection. A webpage with expanded results and additional pictures that didn't fit into Appendices of our Paper will be here soon. We apologize for the delay</p>
-  </body>
+
+<body onpageshow="selectChanged(this.pictures.value);">
+  <nav class="main-nav__links">
+    <ul>
+      <li>
+        <a href="#home">Home</a>
+      </li>
+      <li>
+	<a href="#repository">Repository</a>
+      </li>
+      <li>
+	<a href="#datasets"> Datasets </a> 
+      </li>
+      <li>
+	<a href="#examples">Examples</a>
+        
+       </li>
+       <li>
+         <a href="#contacts">Contact us</a>
+       </li>   
+     </ul>
+  </nav>
+  <div class="nav-logo-bottom">
+    <img src="pics/cropped-logo-1.png";  alt="IJCAI JEJU 2024 logo"> 
+  </div>
+ <div class="outer-border">
+<section class="home-section" id="home">
+  <div class="container">
+
+    <header class="home-section__header">
+    <h1> Improving the Robustness of AI-generated Content Detection </h1>
+      <div class="intro">
+        
+        <blockquote>
+      <h3> On the Way towards Better Artificial Content Detectors  </h3>
+     	  <b>
+	With growing abilities of generative models, artificial content detection becomes an increasingly important and difficult task. We focus on the robustness of AI-generated content detectors, namely their ability to transfer to unseen generators or semantic domains. First, we analyze existing AI-generated image detection methods and show how to train interpretable state of the art classifiers on top of pretrained embeddings in the semantic space and choose the training set for the best robustness. 
+    For the text domain, we propose two novel methods to clear harmful subspaces from the embedding space. 
+    Our best method based on removing the components of the embedding vector increases the mean out-of-distribution (OOD) classification score by up to 4% for cross-domain transfer on the text domain;
+    our best method based on head pruning increases the mean out-of-distribution (OOD) classification score by up to 7%.
+    	  </b>
+       <p>
+             On this webpage we provide suplementoral material for our article <i>"Improving the Robustness of AI-generated Content Detection" </i>
+ that we submitted to the <i>Conference</i>. 
+
+Here we present throughout description of all datasets that we used in our experiments, samples of generated images, and other information that didn't fit into the article of limited
+            </p>
+        </blockquote>
+      </div>
+    </header>
+  </div>
+</section>
+
+<section-class="paper-section" id="repository">
+  <div class="container">
+      <header class="paper-section__header">
+          <div class="title_imp"><h2> Article and Source Code </h2></div>
+      </header>
+      <table class="noborder">
+          <tr class="noborder">
+             <td class="noborder"; width=10%>
+                <img src="pics/article.png";  width=100%; alt="scripted paper"> 
+             </td>
+             <td class="noborder"; width=1.5%> &nbsp; </td>
+             <td class="noborder"; width=36%>
+               <h4> Our article  </h4>
+               <i> Article "Improving the Robustness of AI-generated Content Detection" is currently under review. When it is completed, here will be a link to the final version of the paper.  </i>
+             </td> 
+             <td class="noborder"; width=5%> &nbsp; </td>
+             <td class="noborder"; width=14%>
+               <img src="pics/github-logo.png";  width=100%;  alt="Github logo"> 
+             </td>
+             <td class="noborder"; width=1.5%> &nbsp; </td>
+             <td class="noborder"; width=32%> 
+               <h4> Our repository  </h4>
+               <p> Github-repository with data and code to reproduce experiments from our paper or try our methods on a completely new tasks/datasets. </p>
+               <i> Right now the repository is under constuction</i>
+             </td>
+          </tr>
+      </table>
+      <p> &nbsp; </p>
+  </div>
+</section>
+
+<section class="appnd-section" id="datasets">
+    <div class="container">
+      <header class="appnd-section__header">
+        <h2> Used Datasets </h2>
+      </header>
+          <p> In our work we used several publicaly available datasets. Here we would like to thank authors of the datasers and provide quick links to the websites of those projects.
+      </p>
+      <div class="grid-container">
+        <figure class="tda-item">
+          <h4>Fake image detection dataset</h4>
+          <ul>
+             <li> <b> Generative Images Dataset </b> - dataset that we created during research for this paper. 
+			 <i>We will publish it for open access after anonymity period for the submission ends. </i> It was constructed in two steps
+				</br>
+				1) We downloaded (image, text) pairs from the <a href="https://laion.ai/blog/laion-aesthetics/">LAION-Aestethics</a> dataset with the images <i>aesthetics score</i> of at least 4.5. 
+				
+				LAION is an open dataset with a very diverse set of images; we filter by the aesthetics score to obtain images of at least moderate visual quality and thus make the distributions of real and generated images closer, as modern text-to-image models generally produce images of high visual quality.
+				
+				</br>
+				2) Based on the text prompts, we generate two images for every prompt using four modern diffusion-based text-to-image models: 
+				<ul style="list-style-type: '- ';">
+					<li> <a href="https://github.com/borisdayma/dalle-mini"> DALL-E mini </a></li>
+					<li> <a href="https://github.com/openai/glide-text2im"> GLIDE </a> with and without CLIP guidance </li>
+					<li> <a href="https://github.com/CompVis/stable-diffusion">Stable Diffusion-v1.4</a> with 50 or 200 generation steps </li>
+					<li> <a href="https://github.com/ai-forever/Kandinsky-2">Kandinsky-v2</a> with 20 or 100 generation steps </li>
+				</ul>
+				</br>
+				We believe that this dataset creation procedure helps ensure that the distributions of real and fake images in the dataset are similar. Furthermore, we believe that the set of images is diverse enough to reflect the distribution of real-world images.
+				</br></br>
+				We suggest that our dataset can be successfully used for several different purposes: 
+				<ul style="list-style-type: '- ';">
+					<li> to train and test fake image detection models in different settings; </li>
+					<li> testing the models’ robustness across different generators;</li>
+					<li> to see how a fake image detection model’s performance is affected by the generative model’s architecture or the number of steps used to generate an image;</li>
+					<li> to ensure the stability of a fake image detection model by testing on two subsets of generated images produced from the same prompts;</li>
+					<li> to compare the performance of different text-to-image models.</li>
+				</ul>
+				</br>
+				Current version of dataset contains 989 original images and twice that number (1,978) images generated by each of the 7 models.
+			 </li>
+			 			 
+          </ul>
+        </figure>
+     </div>
+      <div class="grid-container">
+        <figure class="tda-item">
+          <h4>Artificial text detection datasets</h4>
+          <ul>
+             <li> <b>SemEval 2024</b> - dataset provided at SemEval 2024 contest (<a href="https://semeval.github.io/SemEval2024/">semeval.github.io/SemEval2024</a>). Covers five domains
+(text types) for text generation:
+                 <ol>
+                    <li> <i><b>Wikipedia</b></i> articles - Wikipedia articles for various topics </li> 
+                    <li> <i><b>Reddit</b></i> - general purpose question answering </li>
+                    <li> <i><b>WikiHow</b></i> - question answering from WikiHow
+                    <li> <i><b>PeerRead</b></i> - peer reviews of scientific articles
+                    <li> <i><b>ArXiv</b></i> - pared texts of scientific articles from ArXiv database
+                 </ol></li>
+             <li> <b>GPT-3.5D</b> - dataset provided by the authors of the paper <a href="https://arxiv.org/abs/2306.04723"> Intrinsic Dimension Estimation for Robust Detection of AI-Generated Texts</a>.
+It contains texts from three domains:
+                 <ol>
+                    <li> <i><b>Wikipedia</b></i> articles - Wikipedia articles for various topics </li> 2,800 genuine Wikipedia articles and 2,800 texts generated by AI from the first two sentences of those articles.
+                    <li> <i><b>Reddit</b></i> - general purpose question answering </li> 2,800 human-written texts and 2,800 AI-generated answers for the same questions.
+                    <li> <i><b>StackExchange</b></i> - engeneering and scientific-related question answering</li>  3,000 human-written texts and 3,000 AI-generated answers for the same questions.
+                 </ol>
+             All AI-generated texts were produced by ChatGPT (GPT-3.5 text-davginci-003) model.
+             </li>
+             <li> <b>GPT-3D</b> - we expanded GPT-3.5D by adding 300 texts generated by GPT4 to each of the three domains. These texts were generated with full accordance to the procedures from <b>GPT-3.5D</b>. This dataset (GPT 4 generations and corresponding human texts) will be available in <a href="???">our repository</a></li>
+          </ul>
+        </figure>
+     </div>	
+</section>
+
+<script>
+	function selectChanged(value) {
+		var prompts_dict = {
+		    "4" : "abacadabra",
+			"18" : "toyota brings back the solar panel on the plug in prius prime but rh electrek co Toyota Prius V Toyota Prius Panoramic Roof",
+			"42" : "Cats How To Draw Norwich Terrier Dog Breed Info Terrier Dog Breeds",
+			"47" : "Ilse Jacobsen Womens Rain70 Raincoat Dark Indigo",
+			"292" : "Antique Victorian nursing chair dating to c.1850 [£795.00]",
+			"434" : "Daelim VT 125 Evolution",
+			"628" : "Photo of Efectos Covid-19: Latam se declara en quiebra",
+			"892" : "Classic Chocolate Chip Cookies",
+			"894" : "Canon EOS Rebel SL1 with EF-S 18-55mm IS Lens",
+			"941" : "PACE 20 Backpack - View 1",
+			"961" : "These doors are so beautiful!"
+		};
+		document.getElementById("text_prompt").innerText = prompts_dict[value];
+
+		document.getElementById("img_real").src = "data/images/real/" + value + ".jpg";
+		document.getElementById("img_dalle").src = "data/images/dall-e-1059/" + value + ".png";
+		document.getElementById("img_glide_base").src = "data/images/glide-base/" + value + ".png";
+		document.getElementById("img_glide_clip").src = "data/images/glide-clip/" + value + ".png";
+		document.getElementById("img_sd50").src = "data/images/sd-14-50/" + value + ".png";
+		document.getElementById("img_sd200").src = "data/images/sd-14-200/" + value + ".png";
+		document.getElementById("kandinsky_20").src = "data/images/kandinsky-20/" + value + ".png";
+		document.getElementById("kandinsky_100").src = "data/images/kandinsky-100/" + value + ".png";
+	}
+	
+	function readjust() {
+	    document.getElementById("first_panel").style.width = (document.getElementById("second_panel").clientWidth) + "px";
+
+		if (document.getElementById("img_dalle").clientHeight >= document.getElementById("img_real").clientHeight) {
+		    document.getElementById("first_panel").style.paddingTop = (10 + document.getElementById("img_dalle").clientHeight - document.getElementById("img_real").clientHeight) + "px";
+		} else {
+			document.getElementById("first_panel").style.paddingTop = "0px";
+		}
+	}	
+</script>
+
+<section class="tda-section" id="examples">
+  <div class="container">
+    <header class="examples-section__header">
+       <h2> Examples of Generated Images </h2>
+    </header>
+	
+    <p>Here we present few samples from our <b> Generative Images Dataset</b>. For each genuine image picked from LAION dataset (<b style="color:purple">Original image</b>) we generated several "artificial counterparts" using various generative models.
+	Here we provide them &#8212; albeit only one (from two) output image per model &#8212; together with the textual prompts that were used as input to generative models.
+	Different images can be celected from the drop-down list on the right.  </p>
+	
+	<div class="gallery-wrapper">
+	    <div style="display:inline-block;float:right">
+		<label for="pictures" style="font-size:1.1rem;">Select image theme: </label>
+		<select class="gallery-selector" name="pictures" id="pictures" onChange="selectChanged(this.value);">
+			<option value="18" selected>Car</option>
+			<option value="42">Dog</option>
+			<option value="47">Raincoat</option>
+			<option value="292">Chair</option>
+			<option value="434">Motorbike</option>
+			<option value="628">Lockdown</option>
+			<option value="892">Cookies</option>
+			<option value="894">Camera</option>
+			<option value="941">Backpack</option>
+			<option value="961">Doors</option>
+		</select> 
+		</div>
+		<div class="gallery-prompt">
+			<b> Prompt used for image generation models:</b></br><p id="text_prompt"> toyota brings back the solar panel on the plug in prius prime but rh electrek co Toyota Prius V Toyota Prius Panoramic Roof</p>
+		</div>
+		<ul>
+			<li> <div id="first_panel" class="gallery-panel">
+					<img id="img_real" src="data/images/real/18.jpg"; width=100%; onload="readjust();">
+				<hr>
+				<h4 style="color:purple; font-weight:600;"> Original image </h4>
+				<p> &nbsp; </p>
+			</div></li>
+			<li> <div id="second_panel" class="gallery-panel">
+				<img id="img_dalle" src="data/images/dall-e-1059/18.png"; width=100%; >
+				<hr>
+				<h4> DALL-E mini </h4>
+				<p> &nbsp; </p>
+			</div></li>
+			<li> <div class="gallery-panel"> 
+				<img id="img_glide_clip" src="data/images/glide-clip/18.png"; width=100%; >
+				<hr>
+				<h4> GLIDE </h4>
+				<p> (with CLIP guidance) </p>
+			</div></li>
+			<li> <div class="gallery-panel"> 
+				<img id="img_glide_base" src="data/images/glide-base/18.png"; width=100%; >
+				<hr>
+				<h4> GLIDE  </h4>
+				<p> (without CLIP guidance) </p>
+			</div></li>
+			<li> <div class="gallery-panel"> 
+				<img id="img_sd50" src="data/images/sd-14-50/18.png"; width=100%; >
+				<hr>
+				<h4> Stable Diffusion v1.4</h4>
+				<p> (50 steps) </p>
+			</div></li>
+			<li> <div class="gallery-panel"> 
+				<img id="img_sd200" src="data/images/sd-14-200/18.png"; width=100%; >
+				<hr>
+				<h4> Stable diffusion v1.4 </h4>
+				<p> (200 steps) </p>
+			</div></li>
+			<li> <div class="gallery-panel"> 
+				<img id="kandinsky_20" src="data/images/kandinsky-20/18.png"; width=100%; >
+				<hr>
+				<h4> Kandinsky-v2 </h4>
+				<p> (20 steps) </p>
+			</div></li>
+			<li> <div class="gallery-panel"> 
+				<img id="kandinsky_100" src="data/images/kandinsky-100/18.png"; width=100%; >
+				<hr>
+				<h4> Kandinsky-v2 </h4>
+				<p> (100 steps) </p>
+			</div></li>
+		</ul>
+	</div>
+	
+  </div>
+</section>
+
+<section class="contacts-section" id="contacts">
+  <div class="container">
+ 
+    <header class="contacts-section__header">
+            <img src="pics/mail-icon.png" alt="E-Mail"> 
+      <h2> Contact information </h2>
+    </header>
+    <div class="contact-info">
+        <p style="text-decoration-line: underline"> When the anonymity period for the review ends, here will be our contacts </p>
+	<p> <i>Place for the e-mail address </i> </p>
+    </div>
+  </div>
+</section>
+<p> &nbsp <i class="upd-detector-v03"> &nbsp </i> </p>
+</div>
+
+</body>
 </html>
